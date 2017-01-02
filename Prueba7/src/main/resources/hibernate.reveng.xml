@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="public" match-name="calendariopagos"/>
+  <table-filter match-schema="public" match-name="ejerce"/>
+  <table-filter match-schema="public" match-name="involucrado"/>
+  <table-filter match-schema="public" match-name="pago"/>
+  <table-filter match-schema="public" match-name="perfil"/>
+  <table-filter match-schema="public" match-name="periodo"/>
+  <table-filter match-schema="public" match-name="tanda"/>
+  <table-filter match-schema="public" match-name="usuario"/>
+</hibernate-reverse-engineering>
