@@ -1,11 +1,13 @@
 package com.abraham.prueba7.data;
-// Generated 29-dic-2016 12:33:52 by Hibernate Tools 5.1.0.Alpha1
+// Generated 03-ene-2017 12:05:03 by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -55,6 +57,7 @@ public class Usuario implements java.io.Serializable {
 	@Id
 
 	@Column(name = "iduser", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getIduser() {
 		return this.iduser;
 	}

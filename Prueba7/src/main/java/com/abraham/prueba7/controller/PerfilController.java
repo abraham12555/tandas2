@@ -1,27 +1,20 @@
 package com.abraham.prueba7.controller;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.abraham.prueba7.data.Perfil;
-import com.abraham.prueba7.data.Periodo;
 import com.abraham.prueba7.model.PerfilModel;
-import com.abraham.prueba7.model.PeriodoModel;
 
 @Controller
 public class PerfilController {
@@ -63,7 +56,6 @@ public class PerfilController {
 	   
 	   @RequestMapping(value = "editarperfil/{idperfil}", method = RequestMethod.GET)
 	   public ModelAndView editContact(@PathVariable("idperfil") int idperfil) {
-		   BigDecimal bd = new BigDecimal(idperfil);
 		   PerfilModel model = new PerfilModel();
 		   Perfil p= new Perfil();
 		   p.setIdperfil(idperfil);

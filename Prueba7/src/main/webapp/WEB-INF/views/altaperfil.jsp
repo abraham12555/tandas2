@@ -17,10 +17,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 
 <h2>Alta Nuevo Perfil</h2>
 <form:form method="POST" modelAttribute="perfil" action="/Prueba7/agregarperfil">
- 
-  <label for="periodo">Id Perfil: </label>
-        <input type="text" id="idperfil"name="idperfil"/> 
-                <br/> <br/>
+
           <label for="periodo">Nombre del Perfil o Rol: </label>
         
         <input type="text" name="perfil"/>

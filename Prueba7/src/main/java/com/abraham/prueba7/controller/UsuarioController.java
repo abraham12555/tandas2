@@ -1,6 +1,5 @@
 package com.abraham.prueba7.controller;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +29,17 @@ public class UsuarioController {
 		     List<Usuario> list=p.getAll();  
 		     PerfilModel perfilmodel = new PerfilModel();
 			   
-		     List<Perfil> lstperfil=perfilmodel.getAll();
+//		     List<Perfil> lstperfil=perfilmodel.getAll();
+		     EjerceModel ejercemodel= new EjerceModel();
+		     Ejerce ejerce = new Ejerce ();
+		     List<Ejerce> lst =ejercemodel.getAll();
+		     Perfil perfil = new Perfil();
+		     perfil=ejerce.getPerfil();
+		     List<Perfil> lstperfil =(List<Perfil>) perfil;
 		     Map<String, Object> modelmap = new HashMap<String, Object>();
 		        modelmap.put("list", list);
 		        modelmap.put("comboperfil", lstperfil);
+		        modelmap.put("comboejerce", lst);
 
 		        return new ModelAndView("altausuario","modelmap",modelmap);  
 
@@ -61,7 +67,6 @@ model.create(usuario);
 				 Usuario usuario = new Usuario();
 				 usuario.setIduser(iduser);
 				 Ejerce ejerce = new Ejerce();
-				 ejerce.setIdejerce(45);
 				 ejerce.setPerfil(perfil);
 				 ejerce.setUsuario(usuario);
 				 EjerceModel ejercemodel=new EjerceModel();
@@ -83,7 +88,6 @@ UsuarioModel model = new UsuarioModel();
 	   
 	   @RequestMapping(value = "editarusuario/{iduser}", method = RequestMethod.GET)
 	   public ModelAndView editContact(@PathVariable("iduser") int iduser) {
-		   BigDecimal bd = new BigDecimal(iduser);
 		   UsuarioModel model = new UsuarioModel();
 		   Usuario p= new Usuario();
 		   p.setIduser(iduser);
@@ -107,7 +111,6 @@ UsuarioModel model = new UsuarioModel();
 	   
 	   @RequestMapping(value = "asignarrolusuario/{iduser}", method = RequestMethod.GET)
 	   public ModelAndView asignarrol(@PathVariable("iduser") int iduser) {
-		   BigDecimal bd = new BigDecimal(iduser);
 		   UsuarioModel model = new UsuarioModel();
 		   PerfilModel perfilmodel = new PerfilModel();
 		   EjerceModel ejercemodel = new EjerceModel();
@@ -120,12 +123,10 @@ UsuarioModel model = new UsuarioModel();
 
 		     System.out.println(ejercemodel.siguiente());
 
-		     List<Ejerce> lstsiguiente = ejercemodel.siguiente();
 
 		     Map<String, Object> modelmap = new HashMap<String, Object>();
 		        modelmap.put("list", lst);
 		        modelmap.put("comboperfil", lstperfil);
-		        modelmap.put("siguiente", lstsiguiente);
 
 	       return new ModelAndView("asignarrol","modelmap",modelmap);  
 	   }

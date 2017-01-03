@@ -31,7 +31,6 @@ public class PeriodoModel {
 	
 	// inserta
 	public void create (Periodo p){
-		List<Periodo> lst = new ArrayList<Periodo>();
 		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			s.beginTransaction();
@@ -52,7 +51,6 @@ public class PeriodoModel {
 	
 	
 	public void remove (Periodo p){
-		List<Periodo> lst = new ArrayList<Periodo>();
 		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			s.beginTransaction();
@@ -71,7 +69,6 @@ public class PeriodoModel {
 	//update 
 	
 	public void update (Periodo p){
-		List<Periodo> lst = new ArrayList<Periodo>();
 		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			s.beginTransaction();

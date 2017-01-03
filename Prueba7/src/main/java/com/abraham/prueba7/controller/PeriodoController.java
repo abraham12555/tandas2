@@ -1,18 +1,12 @@
 package com.abraham.prueba7.controller;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +15,7 @@ import com.abraham.prueba7.data.Periodo;
 import com.abraham.prueba7.model.PeriodoModel;
 
 @Controller
-public class StudentController {
+public class PeriodoController {
 
    @RequestMapping(value = "/index", method = RequestMethod.GET)
    public String index() {
@@ -56,7 +50,6 @@ public class StudentController {
    
    @RequestMapping(value = "editar/{idperiodo}", method = RequestMethod.GET)
    public ModelAndView editContact(@PathVariable("idperiodo") int idperiodo) {
-	   BigDecimal bd = new BigDecimal(idperiodo);
 	   PeriodoModel model = new PeriodoModel();
 	   Periodo p= new Periodo();
 	   p.setIdperiodo(idperiodo);

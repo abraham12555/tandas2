@@ -17,12 +17,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 
 <h2>Alta Nuevo Usuario</h2>
 <form:form method="POST" modelAttribute="usuario" action="/Prueba7/agregarusuario">
-  <label for="iduser">Id Usuario </label>
 
-<input type="text" name="iduser" id="iduser">
-
-<br/> <br/>
- 
   <label for="nombreu">Nombre: </label>
 
 <input type="text" name="nombreu" id="nombreu">
@@ -42,7 +37,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 <br/> <br/>
 <label for="login">Login: </label>
 
-<input type="text" name="login" id="login">
+<input type="text" name="login" id="login" required="required">
 
 <br/> <br/>
 <label for="amu">Password: </label>
@@ -63,12 +58,23 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 <br/> <br/>
 <select name="idperfil">
     <option value="NONE">--- Seleciona un Perfil ---</option>
-   <c:forEach items="${modelmap.comboperfil}" var="prof">
-       <option value="${prof.idperfil}">${prof.perfil}</option>
+   <c:forEach items="${modelmap.comboejerce}" var="prof">
+       <option value="${prof.idejerce}">${prof.idejerce}</option>
        
        </c:forEach>
        </select>
        
+       <select name="idperfil">
+    <option value="NONE">--- Seleciona un Perfil ---</option>
+   <c:forEach items="${modelmap.comboperfil}" var="prof">
+       <option value="${prof.perfil}">${prof.perfil}</option>
+       
+       </c:forEach>
+       </select>
+       
+       
+     
+ 
 
         
         <input type="Submit" Value="Guardar"/>

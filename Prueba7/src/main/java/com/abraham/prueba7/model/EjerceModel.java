@@ -20,7 +20,7 @@ public class EjerceModel {
 		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			s.beginTransaction();
-			lst= s.createCriteria(Ejerce.class).list();
+	        lst = s.createQuery("FROM Ejerce").list(); 
 			s.getTransaction().commit();
 
 

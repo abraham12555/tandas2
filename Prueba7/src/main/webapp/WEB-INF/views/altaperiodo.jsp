@@ -17,11 +17,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 
 <h2>Alta Nuevo Periodo</h2>
 <form:form method="POST" modelAttribute="periodo" action="/Prueba7/agregarperiodo">
-         <label for="idperiodo">Id Periodo </label>
-
-<input type="text" name="idperiodo" id="idperiodo">
-
-<br/> <br/>
+  
  
   <label for="periodo">Nombre del Periodo: </label>
 

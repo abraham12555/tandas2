@@ -19,9 +19,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 </head>
 <body>
 <form:form method="POST" modelAttribute="ejerce" action="/Prueba7/guardarrol">
- <c:forEach var="siguiente " items="${modelmap.siguiente}">   
-<input type="text" name="idejerce" id="idejerce" value="${modelmap.siguiente}" readonly="readonly">
-        </c:forEach>
+<input type="text" name="idejerce" id="idejerce"  >
        <c:forEach var="per" items="${modelmap.list}">   
         <label for="iduser">Id Usuario </label>
 
