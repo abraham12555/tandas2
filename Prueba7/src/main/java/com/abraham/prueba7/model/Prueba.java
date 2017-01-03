@@ -9,7 +9,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.abraham.prueba7.data.Periodo;;
+import com.abraham.prueba7.data.Ejerce;
+import com.abraham.prueba7.data.Perfil;
+import com.abraham.prueba7.data.Periodo;
+import com.abraham.prueba7.data.Usuario;;
 
 public class Prueba {
 
@@ -19,15 +22,10 @@ public class Prueba {
 		try{
 			Transaction tx = session.beginTransaction();
 
-	        Periodo p = new Periodo();
-	        Query query = session.createQuery("from Usuario where nombreu = :nombreu ");
-	        query.setParameter("nombreu", "Juan");
-	        List list = query.list();
-	        System.out.println(list.get(0));
-	        int size=list.size();
-	        for(int x=0;x<list.size();x++) {
-	            System.out.println(list.get(x));
-	          }
+EjerceModel model= new EjerceModel();
+model.siguiente();
+System.out.println(model.siguiente());
+
         }
 
 		catch(Exception e){

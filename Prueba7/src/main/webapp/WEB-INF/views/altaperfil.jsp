@@ -35,7 +35,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
               <th>Editar</th>  
                  <th>Modificar</th>
         </tr>
-   <c:forEach var="per" items="${list}">   
+   <c:forEach var="per" items="${model.list}">   
    <tr>  
    <td>${per.idperfil}</td>  
    <td>${per.perfil}</td>  

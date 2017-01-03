@@ -15,7 +15,7 @@
 
     <property name="hibernate.current_session_context_class">thread</property>
 
-        
+        <property name="current_session_context_class">thread</property> 
           <mapping class="com.abraham.prueba7.data.Periodo"/>
                 <mapping class="com.abraham.prueba7.data.Tanda"/>
                                 <mapping class="com.abraham.prueba7.data.Calendariopagos"/>

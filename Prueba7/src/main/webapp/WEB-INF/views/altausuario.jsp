@@ -61,6 +61,14 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 <label for="no">No </label>
 
 <br/> <br/>
+<select name="idperfil">
+    <option value="NONE">--- Seleciona un Perfil ---</option>
+   <c:forEach items="${modelmap.comboperfil}" var="prof">
+       <option value="${prof.idperfil}">${prof.perfil}</option>
+       
+       </c:forEach>
+       </select>
+       
 
         
         <input type="Submit" Value="Guardar"/>
@@ -77,7 +85,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
                   <th>Editar</th>  
                  <th>Modificar</th>
         </tr>
-   <c:forEach var="per" items="${list}">   
+   <c:forEach var="per" items="${modelmap.list}">   
    <tr>  
    <td>${per.iduser}</td>  
    <td>${per.nombreu}</td>  

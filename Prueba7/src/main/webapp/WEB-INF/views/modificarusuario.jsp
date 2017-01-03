@@ -19,7 +19,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 </head>
 <body>
 <form:form method="POST" modelAttribute="Usuario" action="/Prueba7/actualizarusuario">
-       <c:forEach var="per" items="${lst}">   
+       <c:forEach var="per" items="${modelmap.list}">   
         <label for="iduser">Id Usuario </label>
 
 <input type="text" name="iduser" id="iduser" value="${per.iduser }" readonly="readonly">

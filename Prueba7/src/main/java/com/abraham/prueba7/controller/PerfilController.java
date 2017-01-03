@@ -2,7 +2,9 @@ package com.abraham.prueba7.controller;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +31,11 @@ public class PerfilController {
 	   public ModelAndView getdata() {
 		   PerfilModel p = new PerfilModel ();
 		     List<Perfil> list=p.getAll();  
-		        return new ModelAndView("altaperfil","list",list);  
+		     
+		       Map<String, Object> model = new HashMap<String, Object>();
+		        model.put("list", list);
+
+		        return new ModelAndView("altaperfil", "model", model);
 
 		}
 	   
