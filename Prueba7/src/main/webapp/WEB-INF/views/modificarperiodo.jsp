@@ -31,12 +31,16 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
  
   <label for="periodo">Periodo: </label>
 
-<input type="text" name="periodo" id="periodo" value="${per.periodo }">
+<input type="text" name="periodo" id="periodo" value="${per.periodo }" required="required">
+<br/> <br/>
+  <label for="intervalo">Intervalo de dias : </label>
+
+<input type="text" name="intervalo" id="intervalo" value="${per.intervalo }" required="required">
 <br/> <br/>
    </c:forEach>  
 
 
-        <input type="Submit" Value="Guardar"/>
+        <input onclick="return confirmar('¿Está seguro que desea guardar el registro?')" type="Submit" Value="Guardar"/>
 
 </form:form>
 
@@ -44,3 +48,9 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
       
 </body>
 </html>
+
+<script>
+function confirmar ( mensaje ) {
+return confirm( mensaje );
+}
+</script> 

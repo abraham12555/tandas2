@@ -31,12 +31,12 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
  
   <label for="perfil">Perfil: </label>
 
-<input type="text" name="perfil" id="perfil" value="${per.perfil }">
+<input type="text" name="perfil" id="perfil" value="${per.perfil }" required="required"/>
 <br/> <br/>
    </c:forEach>  
 
 
-        <input type="Submit" Value="Guardar"/>
+        <input onclick="return confirmar('¿Está seguro que desea guardar el registro?')" type="Submit" Value="Guardar"/>
 
 </form:form>
 
@@ -44,3 +44,9 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
       
 </body>
 </html>
+
+<script>
+function confirmar ( mensaje ) {
+return confirm( mensaje );
+}
+</script>

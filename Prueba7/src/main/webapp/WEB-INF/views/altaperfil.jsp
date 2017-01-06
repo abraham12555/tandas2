@@ -16,11 +16,32 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 <body>
 
 <h2>Alta Nuevo Perfil</h2>
-<form:form method="POST" modelAttribute="perfil" action="/Prueba7/agregarperfil">
+
+<c:url value="/j_spring_security_logout" var="logoutUrl" />
+	<form action="${logoutUrl}" method="post" id="logoutForm">
+	  <input type="hidden"
+		name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+	</form>
+
+	<script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
+
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<h2>
+			Bienvenido : ${pageContext.request.userPrincipal.name} | <a
+				href="javascript:formSubmit()"> Logout</a>
+		</h2>
+	</c:if>
+ <a href="<c:url value='/welcome' />" >Menu</a>
+ <form:form method="POST" modelAttribute="perfil" action="/Prueba7/agregarperfil">
 
           <label for="periodo">Nombre del Perfil o Rol: </label>
         
-        <input type="text" name="perfil"/>
+        <input type="text" name="perfil" required="required"/>
                         <br/> <br/>
         
         <input type="Submit" Value="Guardar"/>
@@ -39,10 +60,16 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
      
      <td><a href="<c:url value='/editarperfil/${per.idperfil}' />" >Edita</a></td>  
  
-     <td><a href="<c:url value='/borrarperfil/${per.idperfil}' />" >Borra</a></td>  
+     <td><a onclick="return confirmar('¿Está seguro que desea eliminar el registro?')" href="<c:url value='/borrarperfil/${per.idperfil}' />" >Borra</a></td>  
    
    </tr>  
    </c:forEach>  
    </table>
 </body>
 </html>
+
+<script>
+function confirmar ( mensaje ) {
+return confirm( mensaje );
+}
+</script> 

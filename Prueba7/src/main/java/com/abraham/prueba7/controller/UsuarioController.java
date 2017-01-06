@@ -23,35 +23,38 @@ public class UsuarioController {
 	
 
 	  
-	   @RequestMapping(value = "/usuario", method = RequestMethod.GET)
-	   public ModelAndView getdata() {
-		   UsuarioModel p = new UsuarioModel ();
-		     List<Usuario> list=p.getAll();  
-		     PerfilModel perfilmodel = new PerfilModel();
-			   
-//		     List<Perfil> lstperfil=perfilmodel.getAll();
-		     EjerceModel ejercemodel= new EjerceModel();
-		     Ejerce ejerce = new Ejerce ();
-		     List<Ejerce> lst =ejercemodel.getAll();
-		     Perfil perfil = new Perfil();
-		     perfil=ejerce.getPerfil();
-		     List<Perfil> lstperfil =(List<Perfil>) perfil;
-		     Map<String, Object> modelmap = new HashMap<String, Object>();
-		        modelmap.put("list", list);
-		        modelmap.put("comboperfil", lstperfil);
-		        modelmap.put("comboejerce", lst);
+	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
+	public ModelAndView getdata() {
+	UsuarioModel p = new UsuarioModel();
+	// List<Usuario> list = p.getAll();
+	PerfilModel perfilmodel = new PerfilModel();
+	EjerceModel ejlmodel = new EjerceModel();
+	ejlmodel.todoEjerce();
+	List<Ejerce> list =ejlmodel.todoEjerce();
+	List<Perfil> lstperfil = perfilmodel.getAll();
+	Map<String, Object> modelmap = new HashMap<String, Object>();
+	modelmap.put("list", list);
+	modelmap.put("comboperfil", lstperfil);
 
-		        return new ModelAndView("altausuario","modelmap",modelmap);  
+	return new ModelAndView("altausuario", "modelmap", modelmap);
 
-		}
+	}
 	   
 	   
 	   @RequestMapping(value = "/agregarusuario", method = RequestMethod.POST) 
-	   public String addperfil(@ModelAttribute("usuario")  Usuario usuario) 
+	   public String addperfil(@ModelAttribute("usuario")  Usuario usuario, @RequestParam("idperfil") int idperfil) 
 	   { 
-		 
+		 System.out.println(usuario);
 				 UsuarioModel model = new UsuarioModel();
 model.create(usuario);
+EjerceModel ejercemodel = new EjerceModel ();
+Ejerce ejerce= new Ejerce();
+ejerce.setUsuario(usuario);
+Perfil perfil= new Perfil ();
+perfil.setIdperfil(idperfil);
+ejerce.setPerfil(perfil);
+
+ejercemodel.create(ejerce);
 	   	   return "redirect:/usuario";
 	   }
 	   @RequestMapping(value = "/guardarrol", method = RequestMethod.POST) 
@@ -77,16 +80,17 @@ model.create(usuario);
 	   }
 	   
 
-	   @RequestMapping(value="borrarusuario/{idusuario}",method = RequestMethod.GET)  
-	   public String delete(@PathVariable("idusuario") int idusuario){  
-		 Usuario p= new Usuario();
-p.setIduser(idusuario);		
-UsuarioModel model = new UsuarioModel();
-		 model.remove(p);
+	   @RequestMapping(value="borrarusuario/{idejerce}",method = RequestMethod.GET)  
+	   public String delete(@PathVariable("idejerce") int idejerce){  
+	Ejerce ejerce = new Ejerce ();
+	ejerce.setIdejerce(idejerce);
+	EjerceModel ejercemodel = new EjerceModel();
+	ejercemodel.remove(ejerce);
+
 		   return "redirect:/usuario";
 	   }
 	   
-	   @RequestMapping(value = "editarusuario/{iduser}", method = RequestMethod.GET)
+	   @RequestMapping(value = "usuario/editarusuario/{iduser}", method = RequestMethod.GET)
 	   public ModelAndView editContact(@PathVariable("iduser") int iduser) {
 		   UsuarioModel model = new UsuarioModel();
 		   Usuario p= new Usuario();
@@ -121,7 +125,6 @@ UsuarioModel model = new UsuarioModel();
 		     List<Usuario> lst=model.edit(p);  
 		     System.out.println(perfilmodel.getAll());
 
-		     System.out.println(ejercemodel.siguiente());
 
 
 		     Map<String, Object> modelmap = new HashMap<String, Object>();

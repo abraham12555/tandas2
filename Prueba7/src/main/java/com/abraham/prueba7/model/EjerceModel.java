@@ -11,28 +11,35 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.abraham.prueba7.data.Ejerce;
 import com.abraham.prueba7.data.Perfil;
+import com.abraham.prueba7.data.Usuario;
 
 public class EjerceModel {
 
 	
-     public List<Ejerce> getAll(){
+	public List<Ejerce> todoEjerce() {
 		List<Ejerce> lst = new ArrayList<Ejerce>();
-		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
-			s.beginTransaction();
-	        lst = s.createQuery("FROM Ejerce").list(); 
-			s.getTransaction().commit();
+		Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+		s.beginTransaction();
+		Query query = s.createQuery("from Ejerce");
+		lst = query.list();
 
 
+		List<Ejerce> ejerce = query.list();
+
+		for (Ejerce c : ejerce) {
+		System.out.println("id ejerce-> " + c.getIdejerce());
+		System.out.println("id usuario-> " + c.getUsuario().getIduser());
+		System.out.println("usuario-> " + c.getUsuario().getNombreu()+ c.getUsuario().getAmu()+ c.getUsuario().getApu());
+		System.out.println("perfil-> " + c.getPerfil().getPerfil());
 		}
-		catch(Exception e){
-			e.printStackTrace();
-            s.getTransaction().rollback();
+		s.getTransaction().commit();
+		} catch (Exception e) {
+		e.printStackTrace();
+		s.getTransaction().rollback();
 
+		} return lst;
 		}
-		return lst;
-	}
-     
      
  	
      public List<Ejerce> siguiente(){
@@ -71,6 +78,24 @@ public class EjerceModel {
 			}
 
 		}
+     
+ 	public void remove (Ejerce ee){
+		List<Usuario> lst = new ArrayList<Usuario>();
+		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			s.beginTransaction();
+            s.delete(ee);
+            s.getTransaction().commit();
+
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+            s.getTransaction().rollback();
+
+		}
+
+	}
 	
 	
 

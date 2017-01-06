@@ -28,29 +28,29 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
  
   <label for="nombreu">Nombre: </label>
 
-<input type="text" name="nombreu"  value="${per.nombreu }" id="nombreu">
+<input type="text" name="nombreu"  value="${per.nombreu }" id="nombreu" required="required">
 
 <br/> <br/>
 
 <label for="apu">Apellido Paterno: </label>
 
-<input type="text" name="apu" id="apu" value="${per.apu }">
+<input type="text" name="apu" id="apu" value="${per.apu }" required="required">
 
 <br/> <br/>
 
 <label for="amu">Apellido Materno: </label>
 
-<input type="text" name="amu" id="amu" value="${per.amu }">
+<input type="text" name="amu" id="amu" value="${per.amu }" required="required">
 
 <br/> <br/>
 <label for="login">Login: </label>
 
-<input type="text" name="login" id="login" value="${per.login }">
+<input type="text" name="login" id="login"  value="${per.login }" required="required">
 
 <br/> <br/>
 <label for="amu">Password: </label>
 
-<input type="password" name="password" id="password" value="${per.password }">
+<input type="password" name="password" id="password" value="${per.password }" required="required">
 
 <br/> <br/>
 <label >Activo </label>
@@ -77,10 +77,16 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 <br/> <br/>
 
         
-        <input type="Submit" Value="Guardar"/>
+        <input onclick="return confirmar('¿Está seguro que desea guardar el registro?')" type="Submit" Value="Guardar"/>
         </c:forEach>
         </form:form>
 
 
 </body>
 </html>
+
+<script>
+function confirmar ( mensaje ) {
+return confirm( mensaje );
+}
+</script> 

@@ -46,7 +46,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 
 
 <br/> <br/>
-<select name="idperfil">
+<select required name="idperfil" >
     <option value="NONE">--- Seleciona un Perfil ---</option>
    <c:forEach items="${modelmap.comboperfil}" var="prof">
        <option value="${prof.idperfil}">${prof.perfil}</option>
@@ -57,10 +57,15 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
    
        
         
-        <input type="Submit" Value="Guardar"/>
+        <input onclick="return confirmar('¿Está seguro que desea guardar el registro?')" type="Submit" Value="Guardar"/>
         </c:forEach>
         </form:form>
 
 
 </body>
 </html>
+<script>
+function confirmar ( mensaje ) {
+return confirm( mensaje );
+}
+</script> 

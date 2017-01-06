@@ -23,17 +23,10 @@ public class Prueba {
 
 		 try{
 	          session.beginTransaction();
-	         List lista = session.createQuery("FROM Ejerce").list(); 
-	         for (Iterator iterator = lista.iterator(); iterator.hasNext();){
-	            Ejerce ejerce = (Ejerce) iterator.next(); 
-	            Perfil perfil = new Perfil();
-				 perfil=ejerce.getPerfil();
-				 Usuario usuario = new Usuario();
-				 usuario=ejerce.getUsuario();
-	            System.out.print("Id ejerce " + ejerce.getIdejerce()); 
-	            System.out.print("  NombrePerfil " + perfil.getPerfil()); 
-	            System.out.println("  Nombre completo " + usuario.getNombreu()+usuario.getApu()+usuario.getAmu()); 
-	         }
+	     Ejerce ejerce = new Ejerce();
+	     ejerce.setIdejerce(10);
+	     session.delete(ejerce);
+	     
 			 session.getTransaction().commit();
 			 }catch(Exception e){
 			e.printStackTrace();

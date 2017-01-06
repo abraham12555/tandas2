@@ -16,20 +16,48 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 <body>
 
 <h2>Alta Nuevo Periodo</h2>
+<c:url value="/j_spring_security_logout" var="logoutUrl" />
+	<form action="${logoutUrl}" method="post" id="logoutForm">
+	  <input type="hidden"
+		name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+	</form>
+
+	<script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
+
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<h2>
+			Bienvenido : ${pageContext.request.userPrincipal.name} | <a
+				href="javascript:formSubmit()"> Logout</a>
+		</h2>
+	</c:if>
+	 <a href="<c:url value='/welcome' />" >Menu</a>
+	
 <form:form method="POST" modelAttribute="periodo" action="/Prueba7/agregarperiodo">
   
  
   <label for="periodo">Nombre del Periodo: </label>
 
-        <input type="text" name="periodo"/>
+        <input type="text" name="periodo" required="required" />
 
 <br/> <br/>
-        <input type="Submit" Value="Guardar"/>
+ <label for="periodo">Intervalo de dias : </label>
+
+        <input type="number" name="intervalo" required="required"/>
+
+<br/> <br/>
+        <input type="Submit" Value="Guardar" />
         </form:form>
         <table>
         <tr>
         <th>Id Periodo</th>
          <th>Periodo</th>
+                  <th>Intervalo de dias</th>
+         
               <th>Editar</th>  
                  <th>Modificar</th>
         </tr>
@@ -37,13 +65,19 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
    <tr>  
    <td>${per.idperiodo}</td>  
    <td>${per.periodo}</td>  
+        <td>${per.intervalo}</td>  
      
      <td><a href="<c:url value='/editar/${per.idperiodo}' />" >Edita</a></td>  
  
-     <td><a href="<c:url value='/borrar/${per.idperiodo}' />" >Borra</a></td>  
+     <td><a onclick="return confirmar('¿Está seguro que desea eliminar el registro?')" href="<c:url value='/borrar/${per.idperiodo}' />" >Borra</a></td>  
    
    </tr>  
    </c:forEach>  
    </table>
 </body>
 </html>
+<script>
+function confirmar ( mensaje ) {
+return confirm( mensaje );
+}
+</script> 

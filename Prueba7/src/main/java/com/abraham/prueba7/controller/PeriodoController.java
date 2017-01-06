@@ -17,10 +17,10 @@ import com.abraham.prueba7.model.PeriodoModel;
 @Controller
 public class PeriodoController {
 
-   @RequestMapping(value = "/index", method = RequestMethod.GET)
-   public String index() {
-	   return "index";
-   }
+   //@RequestMapping(value = "/index", method = RequestMethod.GET)
+   //public String index() {
+	 //  return "index";
+   //}
    
    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
    public String redirect() {
