@@ -57,6 +57,8 @@ ejerce.setPerfil(perfil);
 ejercemodel.create(ejerce);
 	   	   return "redirect:/usuario";
 	   }
+	   
+	   
 	   @RequestMapping(value = "/guardarrol", method = RequestMethod.POST) 
 	   public String addrol(@RequestParam("iduser") int iduser,
 	            @RequestParam("idperfil") int idperfil) 
