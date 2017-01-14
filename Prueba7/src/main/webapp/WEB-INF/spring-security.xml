@@ -10,8 +10,17 @@
 <access-denied-handler error-page="/403" />
 <intercept-url pattern="/perfil**" access="hasRole('Admin')" />
 <intercept-url pattern="/usuario**" access="hasRole('Admin')" />
+<intercept-url pattern="/tanda**" access="hasRole('Admin')" /> 
+<intercept-url pattern="/involucrado**" access="hasRole('Admin')" /> 
+<intercept-url pattern="/pago**" access="hasRole('Admin')" /> 
+
+
+
+<intercept-url pattern="/vercalendario/**" access="hasRole('Admin')" /> 
+<intercept-url pattern="/agregartanda" access="hasRole('Admin')" />
 <intercept-url pattern="/agregarusuario" access="hasRole('Admin')" />
 <intercept-url pattern="/altaperiodo**" access="hasRole('Admin')" />
+<intercept-url pattern="/altatanda**" access="hasRole('Admin')" />
 <intercept-url pattern="/welcome"  access="hasAnyRole('Usuario','Admin')" />
 		
 		<form-login

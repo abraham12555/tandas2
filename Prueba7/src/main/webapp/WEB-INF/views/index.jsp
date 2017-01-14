@@ -30,6 +30,9 @@
 <a href="/Prueba7/perfil"> Perfiles</a>
 <a href="/Prueba7/altaperiodo"> Periodo</a>
 <a href="/Prueba7/usuario"> Usuarios</a>
+<a href="/Prueba7/tanda"> Tandas</a>
+<a href="/Prueba7/pago"> Pagos</a>
+<a href="/Prueba7/involucrado"> Agregar involucrados</a>
 
 
 </body>

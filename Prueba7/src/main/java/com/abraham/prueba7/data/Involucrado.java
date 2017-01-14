@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -52,6 +54,7 @@ public class Involucrado implements java.io.Serializable {
 	@Id
 
 	@Column(name = "idit", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getIdit() {
 		return this.idit;
 	}
