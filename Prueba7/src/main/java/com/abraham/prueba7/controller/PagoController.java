@@ -26,24 +26,34 @@ public class PagoController {
 	 
 	   @RequestMapping(value="pago/{idtanda}",method = RequestMethod.GET)  
 	   public ModelAndView vercalendario(@PathVariable("idtanda") int idtanda){  
-		CalendariopagosModel model = new CalendariopagosModel();
-		InvolucradoModel model2 = new InvolucradoModel();
-		     List<Calendariopagos> list=model.todoCalendariopagos(idtanda);
+		   InvolucradoModel model = new InvolucradoModel();
+		   CalendariopagosModel  model2= new CalendariopagosModel();
+		  List<Involucrado> list= model.involucradosporTanda(idtanda);
+		  List<Calendariopagos> list2= model2.todoCalendariopagos(idtanda);
 
-		     
+		  System.out.println("Lista Involucrados"+list);
+
+		  ModelAndView modelandview=new ModelAndView();
+			 modelandview.addObject("idtanda", idtanda);
 				Map<String, Object> modelmap = new HashMap<String, Object>();
 				modelmap.put("list", list);
-		      
-		
+				modelmap.put("list2", list2);
+			
 		        return new ModelAndView("altapago2","modelmap",modelmap); 
 	   }
+	   
 
 	@RequestMapping(value = "/agregarpago", method = RequestMethod.POST)
 	public String addinvo(@ModelAttribute("pago") Pago pago) {
 		PagoModel model = new PagoModel();
+	
+	
+		System.out.println("fpago-->"+pago.getFpago());
+		System.out.println("idcp-->"+pago.getCalendariopagos().getIdcp());
+		System.out.println("idit-->"+pago.getInvolucrado().getIdit());
 		model.create(pago);
-		System.out.println("usuario tabla Involucrado -->");
-		return "redirect:/pago";
+
+		return "redirect:/welcome";
 	}
 
 	@RequestMapping(value = "editarpago/{idpago}", method = RequestMethod.GET)
@@ -84,6 +94,32 @@ public class PagoController {
 		PagoModel model = new PagoModel();
 		model.remove(p);
 		return "redirect:/pago";
+	}
+	
+	
+	
+	
+
+	@RequestMapping(value = "verpagostanda/{idtanda}", method = RequestMethod.GET)
+	public ModelAndView verpagostanda(@PathVariable("idtanda") int idtanda) {
+		PagoModel model = new PagoModel();
+		Pago p = new Pago();
+	
+		List<Pago> listpa = model.edit(p);
+
+		InvolucradoModel inv = new InvolucradoModel();
+		PagoModel pa = new PagoModel();
+
+		//List<Involucrado> list = inv.getAll();
+		List<Calendariopagos> listcp = pa.getAllCP();
+
+		Map<String, Object> modelmap = new HashMap<String, Object>();
+		modelmap.put("list", listpa);
+		//modelmap.put("comboinv", list);
+		modelmap.put("combocp", listcp);
+
+		return new ModelAndView("modificarpago", "modelmap", modelmap);
+
 	}
 
 

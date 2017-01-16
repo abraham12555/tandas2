@@ -42,28 +42,15 @@ td, th {
 	<form:form method="POST" modelAttribute="involucrado"
 		action="/Prueba7/agregarinvo">
 	
-
-		<br />
-		<br />
-				<label for="idcp">Id Tanda</label>
+		<label for="idtanda">Idtanda</label>
 		
-		<select name="Tanda.idtanda" id="Tanda.idtanda">
-			<option value="NONE">--- Seleciona la Tanda ---</option>
-			<c:forEach items="${modelmap.combotanda}" var="prof">
-				<option value="${prof.idtanda}">${prof.idtanda}</option>
-
-			</c:forEach>
-		</select>
-
-		<br />
-		<br />
-		<br />
-		<br />		<label for="idcp">Usuario</label>
+		<input type="text" name="Tanda.idtanda" value="${idtanda}" readonly="readonly"/>
+	<label for="idcp">Usuario</label>
 		
 		<select name="Usuario.iduser" id="Usuario.iduser">
 			<option value="NONE">--- Seleciona un Usuario ---</option>
 			<c:forEach items="${modelmap.combousuario}" var="prof">
-				<option value="${prof.iduser}">${prof.nombreu}</option>
+				<option value="${prof.iduser}">${prof.nombreu} ${prof.apu} ${prof.amu}</option>
 
 			</c:forEach>
 		</select>
@@ -112,14 +99,14 @@ td, th {
 			<tr>
 				<td>${per.idit}</td>
 				<td>${per.tanda.idtanda}</td>
-				<td>${per.usuario.nombreu}</td>
+				<td>${per.usuario.nombreu} ${per.usuario.apu} ${per.usuario.amu}</td>
 				<td>${per.numerot}</td>
 				<td>${per.pentregado}</td>
 				<td>${per.adeudo}</td>
 
-				<td><a href="<c:url value='/editarinvolu/${per.idit}' />">Edita</a></td>
+				<td><a href="<c:url value='/editarinvolu/${per.idit}/${per.tanda.idtanda}' />">Edita</a></td>
 
-				<td><a href="<c:url value='/borrarinvolu/${per.idit}' />">Borra</a></td>
+				<td><a href="<c:url value='/borrarinvolu/${per.idit}/${per.tanda.idtanda}' />">Borra</a></td>
 
 			</tr>
 		</c:forEach>

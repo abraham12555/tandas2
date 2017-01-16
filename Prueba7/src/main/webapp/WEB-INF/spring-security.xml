@@ -15,9 +15,10 @@
 <intercept-url pattern="/pago**" access="hasRole('Admin')" /> 
 
 
-
 <intercept-url pattern="/vercalendario/**" access="hasRole('Admin')" /> 
+<intercept-url pattern="/agregarinvo/**" access="hasRole('Admin')" /> 
 <intercept-url pattern="/agregartanda" access="hasRole('Admin')" />
+<intercept-url pattern="/agregarpago" access="hasRole('Admin')" />
 <intercept-url pattern="/agregarusuario" access="hasRole('Admin')" />
 <intercept-url pattern="/altaperiodo**" access="hasRole('Admin')" />
 <intercept-url pattern="/altatanda**" access="hasRole('Admin')" />

@@ -54,27 +54,19 @@ td, th {
 			<br />
 
 			<br />
-			<label>Id Tanda </label>
-			<select name="Tanda.idtanda" id="Tanda.idtanda">
-				<option value="${per.tanda.idtanda}">${per.tanda.idtanda}</option>
-				<c:forEach items="${modelmap.combotanda}" var="prof">
-					<option value="${prof.idtanda}">${prof.idtanda}</option>
-
-				</c:forEach>
-			</select>
+				<label for="idtanda">Idtanda</label>
+		
+		<input type="text" name="Tanda.idtanda" value="${idtanda}" readonly="readonly"/>
 
 			<br />
 			<br />
 			<br />
 			<br />
 			<label>Usuario</label>
-			<select name="Usuario.iduser" id="Usuario.iduser">
-				<option value="${modelmap.idu}">${modelmap.nom}</option>
-				<c:forEach items="${modelmap.combousuario}" var="prof1">
-					<option value="${prof1.iduser}">${prof1.nombreu}</option>
+					<input type="text" name="Usuario.iduser" value="${per.usuario.iduser}" readonly="readonly"/>
+			
+		<input type="text" name="nombre" id="idit" value="${per.usuario.nombreu} ${per.usuario.apu} ${per.usuario.amu}"readonly="readonly">
 
-				</c:forEach>
-			</select>
 
 			<br />
 			<br />

@@ -115,6 +115,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
                      <th>Ver Calendario</th>   
                       <th>Borrar Calendario</th> 
                        <th>Realizar Pago</th> 
+                           <th>Agregar Involucrados</th> 
         </tr>
         
    <c:forEach var="ta" items="${modelmap.list}">   
@@ -133,7 +134,8 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
         <td><a href="<c:url value='/generarcalendario/${ta.idtanda}' />" >Generar calendario</a></td>  
           <td><a href="<c:url value='/vercalendario/${ta.idtanda}' />" >Ver calendario</a></td>  
             <td><a href="<c:url value='/borrarcalendario/${ta.idtanda}' />" >Borrar calendario</a></td>    
-                        <td><a href="<c:url value='/pago/${ta.idtanda}' />" >Realizar Pago</a></td>    
+                        <td><a href="<c:url value='/pago/${ta.idtanda}' />" >Realizar Pago</a></td> 
+                          <td><a href="<c:url value='/involucrado/${ta.idtanda}' />" >Agregar Involucrados</a></td>     
             
    </tr>  
    </c:forEach>  

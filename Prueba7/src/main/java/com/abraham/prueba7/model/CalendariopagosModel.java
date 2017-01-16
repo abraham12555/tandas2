@@ -26,6 +26,7 @@ public class CalendariopagosModel {
 		System.out.println("No pago-> " + c.getPagon());
 		System.out.println("fecha inicio-> " + c.getFip());
 		System.out.println("fecha final-> " + c.getFfp());
+		System.out.println("fecha final-> " + c.getPagos());
 
 		System.out.println("idtanda-> " + c.getTanda().getIdtanda());
 

@@ -15,25 +15,28 @@ import com.abraham.prueba7.data.Involucrado;
 import com.abraham.prueba7.data.Tanda;
 import com.abraham.prueba7.data.Usuario;
 import com.abraham.prueba7.model.InvolucradoModel;
+import com.abraham.prueba7.model.TandaModel;
 import com.abraham.prueba7.model.UsuarioModel;
 
 @Controller
 public class InvolucradoController {
 
-	@RequestMapping(value = "/involucrado", method = RequestMethod.GET)
-	public ModelAndView getdataIn() {
+	@RequestMapping(value="involucrado/{idtanda}",method = RequestMethod.GET)  
+	public ModelAndView getdataIn(@PathVariable("idtanda") int idtanda) {
 		InvolucradoModel invomodel = new InvolucradoModel();
 		UsuarioModel usuariomodel = new UsuarioModel();
 
-		List<Involucrado> list = invomodel.getAll();
-		List<Tanda> lsttanda = invomodel.getAllTanda();
+		List<Involucrado> list = invomodel.involucradosporTanda(idtanda);
 		List<Usuario> lstusuario = usuariomodel.getAll();
+		
+		ModelAndView model=new ModelAndView();
+		 model.addObject("idtanda", idtanda);
 
 		Map<String, Object> modelmap = new HashMap<String, Object>();
 		modelmap.put("list", list);
-		modelmap.put("combotanda", lsttanda);
 		modelmap.put("combousuario", lstusuario);
-
+	
+		
 		return new ModelAndView("altainvolucrado", "modelmap", modelmap);
 
 	}
@@ -42,34 +45,28 @@ public class InvolucradoController {
 	public String addinvo(@ModelAttribute("involucrado") Involucrado involucrado) {
 		InvolucradoModel model = new InvolucradoModel();
 		model.create(involucrado);
-		System.out.println("usuario tabla Involucrado -->");
-		return "redirect:/involucrado";
+		int idtanda=involucrado.getTanda().getIdtanda();
+		System.out.println("id");
+		return "redirect:involucrado/"+idtanda+"";
 	}
 
-	@RequestMapping(value = "editarinvolu/{idit}", method = RequestMethod.GET)
-	public ModelAndView editinvo(@PathVariable("idit") int idit) {
+	@RequestMapping(value = "editarinvolu/{idit}/{idtanda}", method = RequestMethod.GET)
+	public ModelAndView editinvo(@PathVariable("idit") int idit,@PathVariable("idtanda") int idtanda) {
 		InvolucradoModel model = new InvolucradoModel();
 		Involucrado p = new Involucrado();
-		p.setIdit(idit);
-		List<Involucrado> lst = model.edit(p);
+		
+		List<Involucrado> lst = model.edit(idit);
 		UsuarioModel usuariomodel = new UsuarioModel();
 
 		List<Tanda> lsttanda = model.getAllTanda();
 		List<Usuario> lstusuario = usuariomodel.getAll();
 		Usuario u = new Usuario();
 		Map<String, Object> modelmap = new HashMap<String, Object>();
-		for (Involucrado c : lst) {
-			u.setIduser(c.getUsuario().getIduser());
-			List<Usuario> lstu = usuariomodel.edit(u);
-			for (Usuario usu : lstu) {
-				modelmap.put("nom", usu.getNombreu());
-				modelmap.put("idu", usu.getIduser());
-			}
-
-		}
-
+	
+		ModelAndView modelandview=new ModelAndView();
+		 modelandview.addObject("idtanda", idtanda);
 		modelmap.put("list", lst);
-		modelmap.put("combotanda", lsttanda);
+		//modelmap.put("combotanda", lsttanda);
 		modelmap.put("combousuario", lstusuario);
 
 		return new ModelAndView("modificarinv", "modelmap", modelmap);
@@ -84,13 +81,15 @@ public class InvolucradoController {
 
 	}
 
-	@RequestMapping(value = "borrarinvolu/{idit}", method = RequestMethod.GET)
-	public String delete(@PathVariable("idit") int idit) {
+	@RequestMapping(value = "borrarinvolu/{idit}/{idtanda}", method = RequestMethod.GET)
+	public String delete(@PathVariable("idit") int idit,@PathVariable("idtanda") int idtanda) {
 		Involucrado p = new Involucrado();
 		p.setIdit(idit);
 		InvolucradoModel model = new InvolucradoModel();
 		model.remove(p);
-		return "redirect:/involucrado";
+	
+		return "redirect:involucrado/"+idtanda+"";
+
 	}
 
 }

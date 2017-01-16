@@ -123,16 +123,25 @@ public class InvolucradoModel {
 
 	}
 
-	public List<Involucrado> edit(Involucrado p) {
+	public List<Involucrado> edit(int idit) {
 		List<Involucrado> lst = new ArrayList<Involucrado>();
 		Session s = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			s.beginTransaction();
-			p.getIdit();
-			int idit = p.getIdit();
-			Query query = s.createQuery("from Involucrado where idit = :idit ");
-			query.setParameter("idit", idit);
+			
+			Query query = s.createQuery("from Involucrado where idit="+idit+"");
+		;
 			lst = query.list();
+			List<Involucrado> involucrado = query.list();
+
+			for (Involucrado c : involucrado) {
+			System.out.println("idit-> " + c.getIdit());
+			System.out.println("usuario-> " + c.getUsuario().getNombreu()+ c.getUsuario().getApu());
+			System.out.println("idit-> " + c.getIdit());
+
+			System.out.println("idtanda-> " + c.getTanda().getIdtanda());
+
+			}
 
 			s.getTransaction().commit();
 
@@ -146,22 +155,25 @@ public class InvolucradoModel {
 	}
 	
 	
-	public List<Calendariopagos> todoCalendariopagos(int idtanda) {
-		List<Calendariopagos> lst = new ArrayList<Calendariopagos>();
+	
+	
+	
+	public List<Involucrado> involucradosporTanda(int idtanda) {
+		List<Involucrado> lst2 = new ArrayList<Involucrado>();
 		Session s = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 		s.beginTransaction();
-		Query query = s.createQuery("from Calendariopagos where idtanda="+idtanda+"");
-		lst = query.list();
+		Query query = s.createQuery("from Involucrado where idtanda="+idtanda+"");
+		lst2 = query.list();
 
 
-		List<Calendariopagos> calendariopagos = query.list();
+		List<Involucrado> involucrado = query.list();
 
-		for (Calendariopagos c : calendariopagos) {
-		System.out.println("id cp-> " + c.getIdcp());
-		System.out.println("No pago-> " + c.getPagon());
-		System.out.println("fecha inicio-> " + c.getFip());
-		System.out.println("fecha final-> " + c.getFfp());
+		for (Involucrado c : involucrado) {
+		System.out.println("id cp-> " +c.getIdit());
+		System.out.println("No pago-> " + c.getUsuario().getIduser()+ c.getUsuario().getNombreu()+c.getUsuario().getAmu());
+		//System.out.println("fecha inicio-> " + c.getFip());
+		//System.out.println("fecha final-> " + c.getFfp());
 
 		System.out.println("idtanda-> " + c.getTanda().getIdtanda());
 
@@ -171,7 +183,14 @@ public class InvolucradoModel {
 		e.printStackTrace();
 		s.getTransaction().rollback();
 
-		} return lst;
+		} return lst2;
 		}
+	
+	
+
+	
+	
+	
+	
 
 }
