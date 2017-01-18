@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html> 
 <head> 
 <!-- link para el codigo de calendario -->
@@ -76,17 +77,20 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
  
   <label for="finicio">Fecha de Inicio: </label>
 
-<input type="text" name="finicio" id="datepicker" value="${tan.finicio}" />
+
+
+    <fmt:formatDate pattern="MM/dd/yyyy" var="i" value="${tan.finicio}" />
+    <input type="text" name="finicio" id="datepicker" value="${i}">
 <br/> <br/>
  
   <label for="ffinal">Fecha Final: </label>
-
-<input type="text" name="ffinal" id="datepicker2"  value="${tan.ffinal}" />
+<fmt:formatDate pattern="MM/dd/yyyy" var="ii" value="${tan.ffinal}" />
+<input type="text" name="ffinal" id="datepicker2"   value="${ii}" />
 <br/> <br/>
 
 <label for="estatus">Estatus: </label>
 <select name="estatus" id="estatus"  >
-    <option value="NONE">${tan.estatus}</option>
+    <option value="${tan.estatus}">${tan.estatus}</option>
        <option value="En proceso">En proceso</option>
        <option value="Pendiente">Pendiente</option>
        <option value="Cancelado">Cancelado</option>
@@ -94,13 +98,12 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
        </select>
  
   <!--<label for="estatus">Estatus: </label>
-
 <input type="text" name="estatus" id="estatus" value="${tan.estatus}">-->
 <br/> <br/>
  
   <label for="periodo">Periodo: </label>
  <select name="Periodo.idperiodo" id="Periodo.idperiodo">
-    <option value="NONE">${tan.periodo.periodo}</option>
+    <option value="${tan.periodo.idperiodo}">${tan.periodo.periodo}</option>
    <c:forEach items="${modelmap.comboperiodo}" var="prof">
        <option value="${prof.idperiodo}">${prof.periodo}</option>  
        </c:forEach>

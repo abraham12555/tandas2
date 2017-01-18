@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 import com.abraham.prueba7.data.Calendariopagos;
 import com.abraham.prueba7.data.Involucrado;
+import com.abraham.prueba7.data.Pago;
 import com.abraham.prueba7.data.Tanda;
 
 public class InvolucradoModel {
@@ -189,7 +190,35 @@ public class InvolucradoModel {
 	
 
 	
-	
+	public List<Involucrado> verificar(int iduser){
+		List<Involucrado> lst = new ArrayList<Involucrado>();
+		Session s= HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			s.beginTransaction();
+		      Query query = s.createQuery("from Involucrado where iduser="+iduser+"");
+		      lst = query.list();
+		      
+		      List<Involucrado> involucrado = query.list();
+
+				for (Involucrado c : involucrado) {
+					System.out.println("Nombre elegido"+c.getUsuario().getNombreu());
+					System.out.println("Adeudo del elegido"+c.getAdeudo());
+					System.out.println("idit"+c.getIdit());
+
+					
+				}
+		      s.getTransaction().commit();
+				
+		}
+		catch(Exception e){
+			e.printStackTrace();
+            s.getTransaction().rollback();
+
+		}
+		return lst;
+
+		
+	}
 	
 	
 

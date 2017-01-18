@@ -85,11 +85,11 @@ public class TandaController {
 	   }
 	 
 	   @RequestMapping(value="/actualizartanda",method = RequestMethod.POST)
-	   public String update(@ModelAttribute(value="Tanda") Tanda tanda) {
+	   public String update(@ModelAttribute(value="tanda") Tanda tanda) {
 
 TandaModel model = new TandaModel();
 	    model.update(tanda);
-		   return "redirect:tanda";
+		   return "redirect:/tanda";
 
 	   }
 	   

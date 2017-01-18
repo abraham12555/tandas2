@@ -80,7 +80,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
  
  <select name="estatus" id="estatus">
     <option value="NONE">--- Seleciona Estatus ---</option>
-       <option value="Enproceso">En proceso</option>
+       <option value="En proceso">En proceso</option>
        <option value="Pendiente">Pendiente</option>
        <option value="Cancelado">Cancelado</option>
        
@@ -133,10 +133,22 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
      <td><a href="<c:url value='/borrartanda/${ta.idtanda}' />" >Borra</a></td>    
         <td><a href="<c:url value='/generarcalendario/${ta.idtanda}' />" >Generar calendario</a></td>  
           <td><a href="<c:url value='/vercalendario/${ta.idtanda}' />" >Ver calendario</a></td>  
-            <td><a href="<c:url value='/borrarcalendario/${ta.idtanda}' />" >Borrar calendario</a></td>    
+            <td><a href="<c:url value='/borrarcalendario/${ta.idtanda}' />" >Borrar calendario</a></td>
+  <c:if test="${ta.estatus eq 'En proceso' }">   
                         <td><a href="<c:url value='/pago/${ta.idtanda}' />" >Realizar Pago</a></td> 
-                          <td><a href="<c:url value='/involucrado/${ta.idtanda}' />" >Agregar Involucrados</a></td>     
-            
+                        </c:if>
+  <c:if test="${ta.estatus eq 'Pendiente'}">   
+                        <td>No puedes realizar Pagos Pendiente</td> 
+                        </c:if>
+   <c:if test="${ta.estatus eq 'Cancelado'}">   
+                        <td>No puedes realizar Pago Cancelado</td> 
+                        </c:if>
+                           <c:if test="${ta.estatus eq 'Cancelado'}">  
+                          <td>No se pueden Agregar involucrados</td>     
+                           </c:if>
+                             <c:if test="${ta.estatus eq 'En proceso' }">   
+                           <td><a href="<c:url value='/involucrado/${ta.idtanda}' />" >Agregar Involucrados</a></td>       
+                           </c:if>
    </tr>  
    </c:forEach>  
    </table>

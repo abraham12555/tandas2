@@ -93,7 +93,15 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 
 		<br />
 		<br />
+<c:forEach var="p" items="${modelmap.listtanda}">
 
+		
+		 
+		<fmt:parseNumber var="i" integerOnly="true" 
+                       type="number" value="${p.monto}" />
+         <label for="ffp">Adeudo </label> <c:out value="${i}" />
+         	<input type="text" name="adeudo" id="adeudo" value="${i}" readonly="readonly"> 
+		</c:forEach>
 			
 
 		<input type="Submit" Value="Guardar" />

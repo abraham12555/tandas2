@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.abraham.prueba7.data.Calendariopagos;
 import com.abraham.prueba7.data.Involucrado;
 import com.abraham.prueba7.data.Pago;
+import com.abraham.prueba7.data.Tanda;
 import com.abraham.prueba7.model.CalendariopagosModel;
 import com.abraham.prueba7.model.InvolucradoModel;
 import com.abraham.prueba7.model.PagoModel;
+import com.abraham.prueba7.model.TandaModel;
 
 @Controller
 public class PagoController {
@@ -30,6 +32,12 @@ public class PagoController {
 	   public ModelAndView vercalendario(@PathVariable("idtanda") int idtanda){  
 		   InvolucradoModel model = new InvolucradoModel();
 		   CalendariopagosModel  model2= new CalendariopagosModel();
+			TandaModel tandamodel =new TandaModel();
+			 Tanda tanda= new Tanda();
+			 tanda.setIdtanda(idtanda);
+	        List<Tanda> listtanda= tandamodel.edit(tanda);
+	        
+	        
 		  List<Involucrado> list= model.involucradosporTanda(idtanda);
 		  List<Calendariopagos> list2= model2.todoCalendariopagos(idtanda);
 
@@ -38,6 +46,7 @@ public class PagoController {
 		  ModelAndView modelandview=new ModelAndView();
 			 modelandview.addObject("idtanda", idtanda);
 				Map<String, Object> modelmap = new HashMap<String, Object>();
+				modelmap.put("listtanda", listtanda);
 				modelmap.put("list", list);
 				modelmap.put("list2", list2);
 			

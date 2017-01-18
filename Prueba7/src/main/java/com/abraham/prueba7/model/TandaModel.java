@@ -133,6 +133,7 @@ public class TandaModel {
 	    for (Tanda c : lst) {
 			System.out.println("id tanda-> " + c.getIdtanda());
 			System.out.println("id periodo-> " + c.getPeriodo().getPeriodo());
+			System.out.println("id tanda-> " + c.getMonto());
 
 		}
 

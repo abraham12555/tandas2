@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <style>
@@ -39,6 +40,7 @@ td, th {
 <body>
 
 	<h2>Alta Involucrados</h2>
+	<
 	<form:form method="POST" modelAttribute="involucrado"
 		action="/Prueba7/agregarinvo">
 	
@@ -60,7 +62,7 @@ td, th {
 
 		<label for="pagon">Numero de Pago: </label>
 
-		<input type="text" name="numerot" id="numerot">
+		<input type="text" name="numerot" id="numerot"> <p>${error}</p>
 
 		<br />
 		<br />
@@ -75,13 +77,16 @@ td, th {
 		<label for="no">No </label>
 		<br />
 		<br />
+		
+	
+	
+         <label for="ffp">Adeudo </label>  
+   
+         	<input type="text" name="adeudo" id="adeudo" value="${modelmap.list3}" readonly="readonly"> 
+         	
 
-		<label for="ffp">Adeudo</label>
-		<input type="text" name="adeudo" id="adeudo">
 		<br />
 		<br />
-
-
 		<input type="Submit" Value="Guardar" />
 	</form:form>
 	<table>

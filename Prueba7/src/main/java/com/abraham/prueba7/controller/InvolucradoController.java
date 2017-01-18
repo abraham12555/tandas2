@@ -1,5 +1,6 @@
 package com.abraham.prueba7.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.abraham.prueba7.data.Involucrado;
-
+import com.abraham.prueba7.data.Pago;
+import com.abraham.prueba7.data.Tanda;
 import com.abraham.prueba7.data.Usuario;
 import com.abraham.prueba7.model.InvolucradoModel;
+import com.abraham.prueba7.model.TandaModel;
 import com.abraham.prueba7.model.UsuarioModel;
 
 @Controller
@@ -22,19 +25,33 @@ public class InvolucradoController {
 
 	@RequestMapping(value="involucrado/{idtanda}",method = RequestMethod.GET)  
 	public ModelAndView getdataIn(@PathVariable("idtanda") int idtanda) {
+		   List<Integer> list3 = new ArrayList<Integer>();
+		
 		InvolucradoModel invomodel = new InvolucradoModel();
 		UsuarioModel usuariomodel = new UsuarioModel();
+		TandaModel tandamodel =new TandaModel();
+		
 
 		List<Involucrado> list = invomodel.involucradosporTanda(idtanda);
 		List<Usuario> lstusuario = usuariomodel.getAll();
 		
 		ModelAndView model=new ModelAndView();
 		 model.addObject("idtanda", idtanda);
-
+		 Tanda tanda= new Tanda();
+		 tanda.setIdtanda(idtanda);
+        List<Tanda> listtanda= tandamodel.edit(tanda);
 		Map<String, Object> modelmap = new HashMap<String, Object>();
+
+        for (Tanda c : listtanda) {
+        	int ddays = (int) (c.getMonto()*c.getNpagos());
+        	System.out.println("monto ya multiplicado"+ddays);
+        	modelmap.put("list3", ddays);
+        }
+		modelmap.put("listtanda", listtanda);
 		modelmap.put("list", list);
 		modelmap.put("combousuario", lstusuario);
-	
+		
+
 		
 		return new ModelAndView("altainvolucrado", "modelmap", modelmap);
 
@@ -42,11 +59,36 @@ public class InvolucradoController {
 
 	@RequestMapping(value = "/agregarinvo", method = RequestMethod.POST)
 	public String addinvo(@ModelAttribute("involucrado") Involucrado involucrado) {
+		int a=0;
 		InvolucradoModel model = new InvolucradoModel();
-		model.create(involucrado);
-		int idtanda=involucrado.getTanda().getIdtanda();
-		System.out.println("id");
-		return "redirect:involucrado/"+idtanda+"";
+		//hacermetodo para validar
+		List<Involucrado> verifica=model.verificar(involucrado.getUsuario().getIduser());
+		System.out.println("Elegiste el usuario con id"+involucrado.getUsuario().getIduser());
+		
+		if(verifica.isEmpty()){
+			System.out.println("Vacio libre ///////////////////////");
+			a=1;
+			
+		}
+		for (Involucrado c : verifica) {
+			
+			System.out.println("Datos en el controller"+c.getIdit()+ c.getUsuario().getNombreu() + c.getAdeudo());
+		if(c.getAdeudo()==0){
+			System.out.println("No tiene adeudo");
+			a=1;
+		}else{
+			System.out.println("tiene adeudo");
+		}
+	
+		}
+		if(a==1){
+			int idtanda=involucrado.getTanda().getIdtanda();
+			model.create(involucrado); 
+			return "redirect:involucrado/"+idtanda+"";
+		}
+	
+		return "a";
+		
 	}
 
 	@RequestMapping(value = "editarinvolu/{idit}/{idtanda}", method = RequestMethod.GET)
