@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.abraham.prueba7.data.Involucrado;
-import com.abraham.prueba7.data.Tanda;
+
 import com.abraham.prueba7.data.Usuario;
 import com.abraham.prueba7.model.InvolucradoModel;
-import com.abraham.prueba7.model.TandaModel;
 import com.abraham.prueba7.model.UsuarioModel;
 
 @Controller
@@ -53,14 +52,14 @@ public class InvolucradoController {
 	@RequestMapping(value = "editarinvolu/{idit}/{idtanda}", method = RequestMethod.GET)
 	public ModelAndView editinvo(@PathVariable("idit") int idit,@PathVariable("idtanda") int idtanda) {
 		InvolucradoModel model = new InvolucradoModel();
-		Involucrado p = new Involucrado();
+		//Involucrado p = new Involucrado();
 		
 		List<Involucrado> lst = model.edit(idit);
 		UsuarioModel usuariomodel = new UsuarioModel();
 
-		List<Tanda> lsttanda = model.getAllTanda();
+		//List<Tanda> lsttanda = model.getAllTanda();
 		List<Usuario> lstusuario = usuariomodel.getAll();
-		Usuario u = new Usuario();
+		//Usuario u = new Usuario();
 		Map<String, Object> modelmap = new HashMap<String, Object>();
 	
 		ModelAndView modelandview=new ModelAndView();

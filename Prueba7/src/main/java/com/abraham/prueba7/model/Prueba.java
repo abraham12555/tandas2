@@ -17,59 +17,62 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.util.SocketUtils;
 
-import com.abraham.prueba7.data.Calendariopagos;
-import com.abraham.prueba7.data.Ejerce;
 import com.abraham.prueba7.data.Involucrado;
-import com.abraham.prueba7.data.Perfil;
-import com.abraham.prueba7.data.Periodo;
-import com.abraham.prueba7.data.Tanda;
-import com.abraham.prueba7.data.Usuario;;
+import com.abraham.prueba7.data.Pago;
+
+
 
 public class Prueba {
 
 	public static void main(String[] args) throws ParseException {
-		 Session session = HibernateUtil.getSessionFactory().openSession();
-		try{ 
-int idtanda=1;
-session.beginTransaction();
-   	     SQLQuery query =  session.createSQLQuery("select involucrado.idit,involucrado.numerot,tanda.idtanda,"
-   	     		+ "usuario.nombreu,usuario.apu,usuario.amu,calendariopagos.pagon as numerodepago ,"
-   	     		+ "calendariopagos.fip,calendariopagos.ffp,pago.fpago as fechaquepago,calendariopagos.ffp-pago.fpago as dif"
-   	     		+ " from involucrado , usuario , tanda ,pago ,calendariopagos where usuario.iduser=involucrado.iduser"
-   	     		+ " and tanda.idtanda=involucrado.idtanda and pago.idit = involucrado.idit"
-   	     		+ " and pago.idcp=calendariopagos.idcp and tanda.idtanda="+idtanda+" order by calendariopagos.pagon asc");
-
-   	     List<Object[]> rows = query.list();
-
-   	     for(Object[] row : rows){
-   	        
-	        
- 	        int idinvolucrado = Integer.parseInt(row[0].toString());
- 	       int pago = Integer.parseInt(row[6].toString());
-
- 	        String nombre = row[3].toString()+row[4].toString()+row[5].toString();
-
-      	     System.out.println("id involucrado= "+ idinvolucrado+ nombre + pago);
-
-   	    
-   	     //System.out.println("fecha"+ nuevaFecha);
-   	     }
-
-   	     session.getTransaction().commit();
-   	     
-   	     
-   	    
-   	     
-
-   	     }
+        Date dinicio = null, dfinal = null;
+        long milis1, milis2, diff;
+		List<Pago> lst = new ArrayList<Pago>();
+		Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			s.beginTransaction();
+			
+			Query query = s.createQuery("from Pago as pago where pago.calendariopagos.tanda=2 and pago.involucrado.tanda=2 order by pago.calendariopagos.pagon asc");
+	
 		
-   	     catch(Exception e){
-   	        e.printStackTrace();
-   	              session.getTransaction().rollback();
+			lst = query.list();
+			List<Pago> pago = query.list();
 
-   	      }
-    
+			for (Pago c : pago) {
+				System.out.println("Numero de pago " + c.getCalendariopagos().getPagon());
+					
+			//System.out.println("idpago " + c.getIdpago());
+		
+			System.out.println("idit-> " + c.getInvolucrado().getUsuario().getNombreu()+c.getInvolucrado().getUsuario().getApu()+c.getInvolucrado().getUsuario().getAmu());
 
+			System.out.println("Fecha inicio" + c.getCalendariopagos().getFip());
+			System.out.println("Fecha final " + c.getCalendariopagos().getFfp());
+			System.out.println("Fecha en que pago " + c.getFpago());
+		 
+
+            
+            Calendar calendar1 = Calendar.getInstance();
+            Calendar calendar2 = Calendar.getInstance();
+            calendar1.setTime(c.getCalendariopagos().getFfp());
+            calendar2.setTime(c.getFpago());
+            long milsecs1= calendar1.getTimeInMillis();
+            long milsecs2 = calendar2.getTimeInMillis();
+            long diff2 =  milsecs1-milsecs2;
+            long dsecs = diff2 / 1000;
+            long dminutes = diff2 / (60 * 1000);
+            long dhours = diff2 / (60 * 60 * 1000);
+           double ddays = diff2 / (24 * 60 * 60 * 1000);
+
+            System.out.println("Your Day Difference="+ddays);
+			}
+
+			s.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			s.getTransaction().rollback();
+
+		}
 
 	}
 }

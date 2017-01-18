@@ -46,7 +46,7 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
 
 
 <br/> <br/>
-<select required name="idperfil" >
+<select name="idperfil" >
     <option value="NONE">--- Seleciona un Perfil ---</option>
    <c:forEach items="${modelmap.comboperfil}" var="prof">
        <option value="${prof.idperfil}">${prof.perfil}</option>

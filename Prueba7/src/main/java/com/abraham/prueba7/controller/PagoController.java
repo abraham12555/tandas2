@@ -1,5 +1,7 @@
 package com.abraham.prueba7.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,21 +106,53 @@ public class PagoController {
 	public ModelAndView verpagostanda(@PathVariable("idtanda") int idtanda) {
 		PagoModel model = new PagoModel();
 		Pago p = new Pago();
-	
-		List<Pago> listpa = model.edit(p);
+		Map<String, Object> modelmap = new HashMap<String, Object>();
 
+	    List <Pago> lista=model.obtenerpago(idtanda);
+	    List<Pago> lista2 =model.obtenerpago(idtanda);
+	    List<Double> list3 = new ArrayList<Double>();
+		for (Pago c : lista2) {
+			
+			System.out.println("Numero de pago en controller" + c.getCalendariopagos().getPagon());
+			
+			//System.out.println("idpago " + c.getIdpago());
+		
+			System.out.println("idit-> Numero de pago en controller " + c.getInvolucrado().getUsuario().getNombreu()+c.getInvolucrado().getUsuario().getApu()+c.getInvolucrado().getUsuario().getAmu());
+
+			System.out.println("Fecha inicio Numero de pago en controller"  + c.getCalendariopagos().getFip());
+			System.out.println("Fecha final Numero de pago en controller" + c.getCalendariopagos().getFfp());
+			System.out.println("Fecha en que pago Numero de pago en controller" + c.getFpago());
+			   
+            Calendar calendar1 = Calendar.getInstance();
+            Calendar calendar2 = Calendar.getInstance();
+            calendar1.setTime(c.getCalendariopagos().getFfp());
+            calendar2.setTime(c.getFpago());
+            long milsecs1= calendar1.getTimeInMillis();
+            long milsecs2 = calendar2.getTimeInMillis();
+            long diff2 =  milsecs1-milsecs2;
+            long dsecs = diff2 / 1000;
+            long dminutes = diff2 / (60 * 1000);
+            long dhours = diff2 / (60 * 60 * 1000);
+           double ddays = diff2 / (24 * 60 * 60 * 1000);
+
+            System.out.println("Diferencia dias ="+ddays);
+    	
+    		 list3.add(ddays);
+		}
+
+		
 		InvolucradoModel inv = new InvolucradoModel();
 		PagoModel pa = new PagoModel();
-
+		
 		//List<Involucrado> list = inv.getAll();
 		List<Calendariopagos> listcp = pa.getAllCP();
-
-		Map<String, Object> modelmap = new HashMap<String, Object>();
-		modelmap.put("list", listpa);
+		//modelmap.put("list", listpa);
 		//modelmap.put("comboinv", list);
 		modelmap.put("combocp", listcp);
-
-		return new ModelAndView("modificarpago", "modelmap", modelmap);
+		modelmap.put("lista", lista);
+		modelmap.put("lista2", lista2);
+        modelmap.put("lista3", list3);
+		return new ModelAndView("verlista", "modelmap", modelmap);
 
 	}
 

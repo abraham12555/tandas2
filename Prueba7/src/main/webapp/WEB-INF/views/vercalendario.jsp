@@ -77,13 +77,6 @@ td,th{ border: 1px solid gray; width: 25%; text-align: left; padding: 5px 10px; 
    </c:forEach>  
    
    </table>
-			<br /><label > Nombre y Apellidos</label>
-		<select name="idit" id="idit">
-			<option value="NONE">--- Seleciona un Nombre---</option>
-			 <c:forEach var="t" items="${modelmap.listt}">   
-				<option value="${t.idit}">${t.idit} </option>
-
-			</c:forEach>
-		</select>
+		
 </body>
 </html>
